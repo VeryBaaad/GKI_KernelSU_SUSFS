@@ -547,10 +547,10 @@ jobs:
 
       # ==================== 推送构建产物到 Telegram ====================
       - name: 推送构建产物到 Telegram
-        if: ${{ (secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_CHAT_ID != '') || (secrets.BOT_TOKEN != '' && secrets.CHANNEL_ID != '') }}
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_TOKEN || secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID != '' && secrets.TELEGRAM_CHAT_ID || secrets.CHANNEL_ID }}
+        if: ${{ env.BOT_TOKEN != '' && env.CHAT_ID != '' }}
         run: |
           set -e
           cd "$GITHUB_WORKSPACE"

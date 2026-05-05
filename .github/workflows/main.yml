@@ -138,7 +138,7 @@ jobs:
     uses: ./.github/workflows/get-manager.yml
     secrets: inherit
     with:
-      kernelsu_variant: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_VARIANT || inputs.kernelsu_variant }}
+      kernelsu_variant: ${{ github.event_name == 'schedule' && 'Official' || inputs.kernelsu_variant }}
 
   # ==================== Android 12 - 5.10 构建 ====================
   build-a12-5-10:
@@ -146,16 +146,16 @@ jobs:
     uses: ./.github/workflows/kernel-a12-5-10.yml
     secrets: inherit
     with:
-      kernelsu_variant: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_VARIANT || inputs.kernelsu_variant }}
-      kernelsu_branch: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_BRANCH || inputs.kernelsu_branch }}
-      version: ${{ github.event_name == 'schedule' && env.SCHEDULE_VERSION || inputs.version }}
-      build_time: ${{ github.event_name == 'schedule' && env.SCHEDULE_BUILD_TIME || inputs.build_time || '' }}
-      use_zram: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_ZRAM || inputs.use_zram }}
-      use_bbg: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_BBG || inputs.use_bbg }}
-      use_kpm: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_KPM || inputs.use_kpm }}
-      use_rekernel: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_REKERNEL || inputs.use_rekernel }}
-      cancel_susfs: ${{ github.event_name == 'schedule' && env.SCHEDULE_CANCEL_SUSFS || inputs.cancel_susfs }}
-      droidspaces: ${{ github.event_name == 'schedule' && env.SCHEDULE_DROIDSPACES || inputs.droidspaces }}
+      kernelsu_variant: ${{ github.event_name == 'schedule' && 'Official' || inputs.kernelsu_variant }}
+      kernelsu_branch: ${{ github.event_name == 'schedule' && 'Dev(开发)' || inputs.kernelsu_branch }}
+      version: ${{ github.event_name == 'schedule' && '' || inputs.version }}
+      build_time: ${{ github.event_name == 'schedule' && 'N' || inputs.build_time || '' }}
+      use_zram: ${{ github.event_name == 'schedule' && false || inputs.use_zram }}
+      use_bbg: ${{ github.event_name == 'schedule' && false || inputs.use_bbg }}
+      use_kpm: ${{ github.event_name == 'schedule' && false || inputs.use_kpm }}
+      use_rekernel: ${{ github.event_name == 'schedule' && false || inputs.use_rekernel }}
+      cancel_susfs: ${{ github.event_name == 'schedule' && false || inputs.cancel_susfs }}
+      droidspaces: ${{ github.event_name == 'schedule' && 'off' || inputs.droidspaces }}
       called_from_main: true
 
   # ==================== Android 13 - 5.15 构建 ====================
@@ -164,16 +164,16 @@ jobs:
     uses: ./.github/workflows/kernel-a13-5-15.yml
     secrets: inherit
     with:
-      kernelsu_variant: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_VARIANT || inputs.kernelsu_variant }}
-      kernelsu_branch: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_BRANCH || inputs.kernelsu_branch }}
-      version: ${{ github.event_name == 'schedule' && env.SCHEDULE_VERSION || inputs.version }}
-      build_time: ${{ github.event_name == 'schedule' && env.SCHEDULE_BUILD_TIME || inputs.build_time || '' }}
-      use_zram: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_ZRAM || inputs.use_zram }}
-      use_bbg: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_BBG || inputs.use_bbg }}
-      use_kpm: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_KPM || inputs.use_kpm }}
-      use_rekernel: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_REKERNEL || inputs.use_rekernel }}
-      cancel_susfs: ${{ github.event_name == 'schedule' && env.SCHEDULE_CANCEL_SUSFS || inputs.cancel_susfs }}
-      droidspaces: ${{ github.event_name == 'schedule' && env.SCHEDULE_DROIDSPACES || inputs.droidspaces }}
+      kernelsu_variant: ${{ github.event_name == 'schedule' && 'Official' || inputs.kernelsu_variant }}
+      kernelsu_branch: ${{ github.event_name == 'schedule' && 'Dev(开发)' || inputs.kernelsu_branch }}
+      version: ${{ github.event_name == 'schedule' && '' || inputs.version }}
+      build_time: ${{ github.event_name == 'schedule' && 'N' || inputs.build_time || '' }}
+      use_zram: ${{ github.event_name == 'schedule' && false || inputs.use_zram }}
+      use_bbg: ${{ github.event_name == 'schedule' && false || inputs.use_bbg }}
+      use_kpm: ${{ github.event_name == 'schedule' && false || inputs.use_kpm }}
+      use_rekernel: ${{ github.event_name == 'schedule' && false || inputs.use_rekernel }}
+      cancel_susfs: ${{ github.event_name == 'schedule' && false || inputs.cancel_susfs }}
+      droidspaces: ${{ github.event_name == 'schedule' && 'off' || inputs.droidspaces }}
       called_from_main: true
 
   # ==================== Android 14 - 6.1 构建 ====================
@@ -182,16 +182,16 @@ jobs:
     uses: ./.github/workflows/kernel-a14-6-1.yml
     secrets: inherit
     with:
-      kernelsu_variant: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_VARIANT || inputs.kernelsu_variant }}
-      kernelsu_branch: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_BRANCH || inputs.kernelsu_branch }}
-      version: ${{ github.event_name == 'schedule' && env.SCHEDULE_VERSION || inputs.version }}
-      build_time: ${{ github.event_name == 'schedule' && env.SCHEDULE_BUILD_TIME || inputs.build_time || '' }}
-      use_zram: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_ZRAM || inputs.use_zram }}
-      use_bbg: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_BBG || inputs.use_bbg }}
-      use_kpm: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_KPM || inputs.use_kpm }}
-      use_rekernel: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_REKERNEL || inputs.use_rekernel }}
-      cancel_susfs: ${{ github.event_name == 'schedule' && env.SCHEDULE_CANCEL_SUSFS || inputs.cancel_susfs }}
-      droidspaces: ${{ github.event_name == 'schedule' && env.SCHEDULE_DROIDSPACES || inputs.droidspaces }}
+      kernelsu_variant: ${{ github.event_name == 'schedule' && 'Official' || inputs.kernelsu_variant }}
+      kernelsu_branch: ${{ github.event_name == 'schedule' && 'Dev(开发)' || inputs.kernelsu_branch }}
+      version: ${{ github.event_name == 'schedule' && '' || inputs.version }}
+      build_time: ${{ github.event_name == 'schedule' && 'N' || inputs.build_time || '' }}
+      use_zram: ${{ github.event_name == 'schedule' && false || inputs.use_zram }}
+      use_bbg: ${{ github.event_name == 'schedule' && false || inputs.use_bbg }}
+      use_kpm: ${{ github.event_name == 'schedule' && false || inputs.use_kpm }}
+      use_rekernel: ${{ github.event_name == 'schedule' && false || inputs.use_rekernel }}
+      cancel_susfs: ${{ github.event_name == 'schedule' && false || inputs.cancel_susfs }}
+      droidspaces: ${{ github.event_name == 'schedule' && 'off' || inputs.droidspaces }}
       called_from_main: true
 
   # ==================== Android 15 - 6.6 构建 ====================
@@ -200,16 +200,16 @@ jobs:
     uses: ./.github/workflows/kernel-a15-6-6.yml
     secrets: inherit
     with:
-      kernelsu_variant: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_VARIANT || inputs.kernelsu_variant }}
-      kernelsu_branch: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_BRANCH || inputs.kernelsu_branch }}
-      version: ${{ github.event_name == 'schedule' && env.SCHEDULE_VERSION || inputs.version }}
-      build_time: ${{ github.event_name == 'schedule' && env.SCHEDULE_BUILD_TIME || inputs.build_time || '' }}
-      use_zram: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_ZRAM || inputs.use_zram }}
-      use_bbg: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_BBG || inputs.use_bbg }}
-      use_kpm: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_KPM || inputs.use_kpm }}
-      use_rekernel: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_REKERNEL || inputs.use_rekernel }}
-      cancel_susfs: ${{ github.event_name == 'schedule' && env.SCHEDULE_CANCEL_SUSFS || inputs.cancel_susfs }}
-      droidspaces: ${{ github.event_name == 'schedule' && env.SCHEDULE_DROIDSPACES || inputs.droidspaces }}
+      kernelsu_variant: ${{ github.event_name == 'schedule' && 'Official' || inputs.kernelsu_variant }}
+      kernelsu_branch: ${{ github.event_name == 'schedule' && 'Dev(开发)' || inputs.kernelsu_branch }}
+      version: ${{ github.event_name == 'schedule' && '' || inputs.version }}
+      build_time: ${{ github.event_name == 'schedule' && 'N' || inputs.build_time || '' }}
+      use_zram: ${{ github.event_name == 'schedule' && false || inputs.use_zram }}
+      use_bbg: ${{ github.event_name == 'schedule' && false || inputs.use_bbg }}
+      use_kpm: ${{ github.event_name == 'schedule' && false || inputs.use_kpm }}
+      use_rekernel: ${{ github.event_name == 'schedule' && false || inputs.use_rekernel }}
+      cancel_susfs: ${{ github.event_name == 'schedule' && false || inputs.cancel_susfs }}
+      droidspaces: ${{ github.event_name == 'schedule' && 'off' || inputs.droidspaces }}
       called_from_main: true
 
   # ==================== Android 16 - 6.12 构建 ====================
@@ -218,16 +218,16 @@ jobs:
     uses: ./.github/workflows/kernel-a16-6-12.yml
     secrets: inherit
     with:
-      kernelsu_variant: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_VARIANT || inputs.kernelsu_variant }}
-      kernelsu_branch: ${{ github.event_name == 'schedule' && env.SCHEDULE_KSU_BRANCH || inputs.kernelsu_branch }}
-      version: ${{ github.event_name == 'schedule' && env.SCHEDULE_VERSION || inputs.version }}
-      build_time: ${{ github.event_name == 'schedule' && env.SCHEDULE_BUILD_TIME || inputs.build_time || '' }}
-      use_zram: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_ZRAM || inputs.use_zram }}
-      use_bbg: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_BBG || inputs.use_bbg }}
-      use_kpm: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_KPM || inputs.use_kpm }}
-      use_rekernel: ${{ github.event_name == 'schedule' && env.SCHEDULE_USE_REKERNEL || inputs.use_rekernel }}
-      cancel_susfs: ${{ github.event_name == 'schedule' && env.SCHEDULE_CANCEL_SUSFS || inputs.cancel_susfs }}
-      droidspaces: ${{ github.event_name == 'schedule' && env.SCHEDULE_DROIDSPACES || inputs.droidspaces }}
+      kernelsu_variant: ${{ github.event_name == 'schedule' && 'Official' || inputs.kernelsu_variant }}
+      kernelsu_branch: ${{ github.event_name == 'schedule' && 'Dev(开发)' || inputs.kernelsu_branch }}
+      version: ${{ github.event_name == 'schedule' && '' || inputs.version }}
+      build_time: ${{ github.event_name == 'schedule' && 'N' || inputs.build_time || '' }}
+      use_zram: ${{ github.event_name == 'schedule' && false || inputs.use_zram }}
+      use_bbg: ${{ github.event_name == 'schedule' && false || inputs.use_bbg }}
+      use_kpm: ${{ github.event_name == 'schedule' && false || inputs.use_kpm }}
+      use_rekernel: ${{ github.event_name == 'schedule' && false || inputs.use_rekernel }}
+      cancel_susfs: ${{ github.event_name == 'schedule' && false || inputs.cancel_susfs }}
+      droidspaces: ${{ github.event_name == 'schedule' && 'off' || inputs.droidspaces }}
       called_from_main: true
 
   # ==================== 收集补丁冲突文件 ====================

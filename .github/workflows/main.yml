@@ -31,7 +31,6 @@ on:
           - Pre-Release
           - Release
         default: Actions
-
       # ==================== KernelSU 配置 ====================
       kernelsu_variant:
         description: "KernelSU 变体"
@@ -40,7 +39,7 @@ on:
           - SukiSU
           - ReSukiSU
           - Official
-          #- Next
+        #- Next
         default: ReSukiSU
       kernelsu_branch:
         description: "KSU 分支"
@@ -117,6 +116,9 @@ on:
         description: "构建全部版本"
         type: boolean
         default: true
+
+  schedule:
+    - cron: '0 0 * * 1'
 
 jobs:
   # ==================== 获取管理器 ====================
@@ -542,6 +544,45 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           path: ./downloaded-artifacts
+
+      # ==================== 推送构建产物到 Telegram ====================
+      - name: 推送构建产物到 Telegram
+        if: ${{ (secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_CHAT_ID != '') || (secrets.BOT_TOKEN != '' && secrets.CHANNEL_ID != '') }}
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_TOKEN || secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID != '' && secrets.TELEGRAM_CHAT_ID || secrets.CHANNEL_ID }}
+        run: |
+          set -e
+          cd "$GITHUB_WORKSPACE"
+          mapfile -t files < <(find ./downloaded-artifacts -type f | sort)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No build artifacts to send to Telegram."
+            exit 0
+          fi
+
+          text="Build artifacts uploaded:\n"
+          for path in "${files[@]}"; do
+            text+="- $(basename "$path")\n"
+          done
+
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT_ID}" \
+            --data-urlencode "text=${text}"
+
+          for path in "${files[@]}"; do
+            if [ ! -f "$path" ]; then
+              continue
+            fi
+            size=$(stat -c%s "$path")
+            if [ "$size" -gt $((50 * 1024 * 1024)) ]; then
+              echo "Skip large file: $path"
+              continue
+            fi
+            curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument" \
+              -F chat_id="${CHAT_ID}" \
+              -F document="@${path}" \
+              -F caption="$(basename "$path")"
+          done
 
       # ==================== 创建 GitHub Release ====================
       - name: 创建 GitHub Release
